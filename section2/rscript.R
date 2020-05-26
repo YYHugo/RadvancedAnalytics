@@ -6,6 +6,8 @@ head(fin)
 tail(fin)
 
 str(fin)
+# summary() gives the important information out of the data
+# Of course, only when data has the correct type of variable, eg 'age' type should be an integer and 'inception' should be a char
 summary(fin)
 
 # Changing from non-factors to factor to correct the type attributed to each info 
@@ -57,4 +59,37 @@ x <- as.numeric(as.character(z))
 # Cleans the screen for next video tutorial
 cat(rep("\n", 50))
 
-# Dealing with different convertions
+# Section 2, video 11
+# gsub() and sub()
+# 'g' stands for 'Global' and 'sub' substitution, like sub and gsub from linux command awk
+# For documentation use "?sub"
+fin$Expenses <- gsub(" Dollars", "", fin$Expenses) # substitute every part ' Dollars' to <nothing> to clean the numeric value
+fin$Expenses <- gsub(",", "", fin$Expenses)
+head(fin)
+str(fin)
+
+#There are special characters that are used as metacharacters, like '$', that must be noted with backlashes before them
+fin$Expenses <- gsub("\\$", "", fin$Expenses)
+fin$Expenses <- gsub(",", "", fin$Expenses)
+head(fin)
+str(fin)
+
+fin$Growth <- gsub("%", "", fin$Growth)
+
+
+fin$Expenses <- as.numeric(fin$Expenses)
+fin$Revenue <- as.numeric(fin$Revenue)
+fin$Growth <- as.numeric(fin$Growth)
+
+# Dealing with missing data
+# you may fill with mean or median from other frames (search all other entries to compute their mean/median)
+# calculate by other informations existing in frame (eg: profit = revenues - expenses)
+##### BUT IF IT IS NOT A INFORMATION TO BE PROXY:
+# leave as it is (blank)
+# remove that registry (by removing the line)
+# keep it by searching its true value by other information that you can search (like year of inception)
+
+# WHAT IS 'AN'?
+# Not Available (or missing value)
+# play with some NA comparison (NA==TRUE, NA==FALSE)...
+# To show if it's an NA, which is a third type of value, is.na()
